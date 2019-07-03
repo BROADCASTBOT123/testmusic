@@ -101,6 +101,9 @@ client.on('message', async msg => {
 
 	if (command === `play`) {
 		const voiceChannel = msg.member.voiceChannel;
+
+        if(!args) return msg.channel.send(':x: Please write a title for song!');
+
         
         if (!voiceChannel) return msg.channel.send("انت لم تدخل روم صوتي");
         
