@@ -278,4 +278,4 @@ function play(guild, song) {//@〖D̷o̷̶Ḿa̶ |̷ B̷O̷Y̷〗#1362  حقوق
 
  
 
-client.login(process.env.TOKEN);
+client.login('NTk1OTk5NDc4NjQxODUyNDU1.XRzLaw.dsvsZEBmVW56dRZ0S179QMe47TA');
