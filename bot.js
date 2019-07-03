@@ -157,7 +157,7 @@ client.on('message', async msg => {
 
 						var response = await msg.channel.awaitMessages(msg2 => msg2.content > 0 && msg2.content < 11, {
 							maxMatches: 1,
-							time: 999999999999999999999999999999999,
+							time: 15000,
 							errors: ['time']
 						});
 					} catch (err) {
