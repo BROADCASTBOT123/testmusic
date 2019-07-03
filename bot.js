@@ -20,8 +20,8 @@ const gif = require("gif-search");
 
 const client = new Discord.Client({disableEveryone: true});
 
-var prefix = "3";
-var adminprefix = 's3'
+var prefix = "=";
+var adminprefix = 's='
 /////////////////////////
 ////////////////////////
 
@@ -87,6 +87,11 @@ client.on('message', async msg =>{
 /////////////////////////
 ////////////////////////
 //////////////////////
+
+
+
+var prefix = "=";
+
 client.on('message', async msg => { 
 	if (msg.author.bot) return undefined;
     if (!msg.content.startsWith(prefix)) return undefined;
@@ -415,7 +420,7 @@ client.on('ready', () => {
 
 client.on('message', msg => {
 
-    if (msg.content == '3join') { /// هنا اكتب الامر و البرفيكس
+    if (msg.content == '1join') { /// هنا اكتب الامر و البرفيكس
         if (msg.member.voiceChannel) {
 
      if (msg.member.voiceChannel.joinable) {
@@ -425,7 +430,7 @@ client.on('message', msg => {
 }
 })
 client.on('ready', () => {
-    client.channels.get("508161402805026818").join();
+    client.channels.get("524925907106922496").join();
     });
 
 client.login(process.env.BOT_TOKEN);
