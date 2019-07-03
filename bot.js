@@ -291,7 +291,7 @@ function play(guild, song) {
 	dispatcher.setVolumeLogarithmic(serverQueue.volume / 5);
 
 	serverQueue.textChannel.send(`🎶 Entrain de jouer : **${song.title}**`);
-}
+    }
 });
 
 client.login(process.env.BOT_TOKEN);
