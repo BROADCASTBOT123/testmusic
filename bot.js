@@ -100,10 +100,8 @@ client.on('message', async msg => {
 	command = command.slice(prefix.length)
 
 	if (command === `play`) {
+		if(!args[1]) return msg.channel.send(':x: Please write title of song!');
 		const voiceChannel = msg.member.voiceChannel;
-
-        if(!args) return msg.channel.send(':x: Please write a title for song!');
-
         
         if (!voiceChannel) return msg.channel.send("انت لم تدخل روم صوتي");
         
@@ -292,26 +290,37 @@ async function handleVideo(video, msg, voiceChannel, playlist = false) {
 }
 
 function play(guild, song) {
-	const serverQueue = queue.get(guild.id);
-
-	if (!song) {
-		serverQueue.voiceChannel.leave();
-		queue.delete(guild.id);
-		return;
-	}
-	console.log(serverQueue.songs);
-
-	const dispatcher = serverQueue.connection.playStream(ytdl(song.url))
-		.on('end', reason => {
-			if (reason === 'Stream is not generating quickly enough.') console.log('Song ended.');
-			else console.log(reason);
-			serverQueue.songs.shift();
-			play(guild, serverQueue.songs[0]);
-		})
-		.on('error', error => console.error(error));
-	dispatcher.setVolumeLogarithmic(serverQueue.volume / 5);
-
-	serverQueue.textChannel.send(`**${song.title}**, is now playing!`);
+  const serverQueue = queue.get(guild.id);
+ 
+  if (!song) {
+    serverQueue.voiceChannel.leave();
+    queue.delete(guild.id);
+    return;
+  }
+  console.log(serverQueue.songs);
+  const dispatcher = serverQueue.connection.playStream(ytdl(song.url))
+    .on('end', reason => { 
+      if (reason === 'Stream is not generating quickly enough.') console.log('Song ended.');
+      else console.log(reason);
+      serverQueue.songs.shift();
+      play(guild, serverQueue.songs[0]);
+    })
+    .on('error', error => console.error(error));
+  dispatcher.setVolumeLogarithmic(serverQueue.volume / 100);
+    fetchVideoInfo(`${song.hi}`, function (err,  idk) {
+  if (err) throw new Error(err);
+  console.log( idk);
+      const yyyy = {}
+  if(!yyyy[msg.guild.id]) yyyy[msg.guild.id] = {
+    like: `${ idk.likeCount}`,
+    dislike: `${ idk.dislikeCount}`
+  }
+  serverQueue.textChannel.send({embed : new Discord.RichEmbed()
+  .setDescription(`:notes: **Playing** \`${idk.title}\` (${song.time}).`)
+  .setColor('BLACK')
+  .setTimestamp()
+})
+})
 }
 
 
